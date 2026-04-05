@@ -1,2 +1,2 @@
-# Self_Study
-My personal self studing repository.
+# C_Basics
+My personal Study of C Basics
