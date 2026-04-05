@@ -28,8 +28,46 @@ void insertion_sort (int* numbers, int size) {
 }
 
 void selection_sort(int* numbers, int size) {
+    for (int i = 0; i < size; i++) {
+        int* pointer = &numbers[i];
+        for (int j = i + 1; j < size; j++) {
+            if (numbers[j] < *pointer) {
+                pointer = &numbers[j];
+            }
+        }
+        int temp = numbers[i];
+        numbers[i] = *pointer;
+        *pointer = temp;
+    }
+}
 
-    
+void quick_sort(int* numbers, int left, int right) {
+    if (left >= right) return;
+
+    int pivot = numbers[(left + right) / 2];
+
+    int i = left;
+    int j = right;
+
+    while (i <= j) {
+        while (numbers[i] < pivot) i++;
+        while (numbers[j] > pivot) j--;
+
+        if (i <= j) {
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    if (left < j) {
+        quick_sort(numbers, left, j);
+    }
+    if (i < right) {
+        quick_sort(numbers, i, right);
+    }
 }
 
 int main() {
@@ -45,7 +83,8 @@ int main() {
     }
     
     clock_t inicio = clock();
-    insertion_sort(numbers, size);
+    // selection_sort(numbers, size);
+    quick_sort(numbers, 0, size - 1);
     clock_t fim = clock();
 
     printf("\n\nValores depois:\n");
